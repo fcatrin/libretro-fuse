@@ -37,10 +37,10 @@ static input_key translate(unsigned index, int port, bool *keyboard_event)
       case RETRO_DEVICE_ID_JOYPAD_DOWN:  return INPUT_JOYSTICK_DOWN;
       case RETRO_DEVICE_ID_JOYPAD_LEFT:  return INPUT_JOYSTICK_LEFT;
       case RETRO_DEVICE_ID_JOYPAD_RIGHT: return INPUT_JOYSTICK_RIGHT;
-      case RETRO_DEVICE_ID_JOYPAD_A:
+      case RETRO_DEVICE_ID_JOYPAD_B:
       case RETRO_DEVICE_ID_JOYPAD_X:
       case RETRO_DEVICE_ID_JOYPAD_Y:     return INPUT_JOYSTICK_FIRE_1;
-      case RETRO_DEVICE_ID_JOYPAD_B:     return INPUT_JOYSTICK_UP;
+      case RETRO_DEVICE_ID_JOYPAD_A:     return INPUT_JOYSTICK_UP;
       case RETRO_DEVICE_ID_JOYPAD_L:     return INPUT_KEY_Return;
       case RETRO_DEVICE_ID_JOYPAD_R:     return INPUT_KEY_space;
    }
@@ -287,7 +287,7 @@ int ui_event(void)
                         case RETRO_DEVICE_ID_JOYPAD_DOWN:  keyb_y = (keyb_y + 1) & 3; break;
                         case RETRO_DEVICE_ID_JOYPAD_LEFT:  keyb_x = keyb_x == 0 ? 9 : keyb_x - 1; break;
                         case RETRO_DEVICE_ID_JOYPAD_RIGHT: keyb_x = keyb_x == 9 ? 0 : keyb_x + 1; break;
-                        case RETRO_DEVICE_ID_JOYPAD_A:
+                        case RETRO_DEVICE_ID_JOYPAD_B:
                            if (keyb_send == 0)
                            {
                               keyb_event.type = INPUT_EVENT_KEYPRESS;
