@@ -276,6 +276,8 @@ static const struct retro_variable core_vars[] =
    { "fuse_ay_stereo_separation", "AY Stereo Separation; none|acb|abc" },
    { "fuse_key_ovrlay_transp", "Transparent Keyboard Overlay; enabled|disabled" },
    { "fuse_key_hold_time", "Time to Release Key in ms; 500|1000|100|300" },
+   { "fuse_controller_port_1", "Controller on Port 1; kempston|cursor" },
+   { "fuse_controller_port_2", "Controller on Port 2; cursor|kempston" },
    { "fuse_joypad_left",    "Joypad Left mapping; " SPECTRUMKEYS },
    { "fuse_joypad_right",   "Joypad Right mapping; " SPECTRUMKEYS },
    { "fuse_joypad_up",      "Joypad Up mapping; " SPECTRUMKEYS },
@@ -446,6 +448,16 @@ int update_variables(int force)
       }
 
       settings_current.stereo_ay = utils_safe_strdup(option == 1 ? "ACB" : option == 2 ? "ABC" : "None");
+   }
+
+   {
+      int option = coreopt(env_cb, core_vars, "fuse_controller_port_1", NULL);
+      retro_set_controller_port_device( 0, option == 1 ? RETRO_DEVICE_KEMPSTON_JOYSTICK : RETRO_DEVICE_CURSOR_JOYSTICK );
+   }
+
+   {
+      int option = coreopt(env_cb, core_vars, "fuse_controller_port_2", NULL);
+      retro_set_controller_port_device( 0, option == 1 ? RETRO_DEVICE_CURSOR_JOYSTICK : RETRO_DEVICE_KEMPSTON_JOYSTICK );
    }
 
    keyb_transparent = coreopt(env_cb, core_vars, "fuse_key_ovrlay_transp", NULL) != 1;
