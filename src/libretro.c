@@ -452,12 +452,12 @@ int update_variables(int force)
 
    {
       int option = coreopt(env_cb, core_vars, "fuse_controller_port_1", NULL);
-      retro_set_controller_port_device( 0, option == 1 ? RETRO_DEVICE_KEMPSTON_JOYSTICK : RETRO_DEVICE_CURSOR_JOYSTICK );
+      retro_set_controller_port_device( 0, option == 0 ? RETRO_DEVICE_KEMPSTON_JOYSTICK : RETRO_DEVICE_CURSOR_JOYSTICK );
    }
 
    {
       int option = coreopt(env_cb, core_vars, "fuse_controller_port_2", NULL);
-      retro_set_controller_port_device( 0, option == 1 ? RETRO_DEVICE_CURSOR_JOYSTICK : RETRO_DEVICE_KEMPSTON_JOYSTICK );
+      retro_set_controller_port_device( 1, option == 0 ? RETRO_DEVICE_CURSOR_JOYSTICK : RETRO_DEVICE_KEMPSTON_JOYSTICK );
    }
 
    keyb_transparent = coreopt(env_cb, core_vars, "fuse_key_ovrlay_transp", NULL) != 1;
