@@ -9,7 +9,7 @@ SOURCES_LUA_C :=
 include $(CORE_DIR)/build/Makefile.common
 SOURCES_C := $(filter-out %/version.c, $(SOURCES_C))
 
-COREFLAGS := $(RETRODEFS) $(INCLUDES)
+COREFLAGS := $(RETRODEFS) $(INCLUDES) -Ofast
 
 GIT_VERSION := " $(shell git rev-parse --short HEAD || echo unknown)"
 ifneq ($(GIT_VERSION)," unknown")
