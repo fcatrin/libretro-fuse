@@ -6,6 +6,7 @@
 #include <string.h>
 #include <errno.h>
 #include <ctype.h>
+#include <time.h>
 
 // Fuse includes
 #include <libspectrum.h>
@@ -1058,12 +1059,21 @@ void retro_run(void)
    emulation runs steadly at 50 FPS. Ideally, we should investigate why fuse
    is doing that and fix it, but this solutions seems to work just fine.
    */
+
+   static struct timeval stop, start;
+   gettimeofday(&start, NULL);
+
+   int ts_start = start.tv_sec * 1000000 + start.tv_usec;
+   int ts_stop, ts_delta;
+   input_poll_cb();
    do {
-      input_poll_cb();
       z80_do_opcodes();
       event_do_events();
+      gettimeofday(&stop, NULL);
+      ts_stop = stop.tv_sec * 1000000 + stop.tv_usec;
+      ts_delta = ts_stop - ts_start;
    }
-   while (!some_audio);
+   while (!some_audio && ts_delta < 20000);
 
    render_video();
 }
