@@ -80,7 +80,7 @@ static libspectrum_word
     0<=d_f_c<16 => Flashing characters are normal
    16<=d_f_c<32 => Flashing characters are reversed
 */
-static int display_frame_count;
+int display_frame_count;
 static int display_flash_reversed;
 
 /* Which eight-pixel chunks on each line (including border) need to

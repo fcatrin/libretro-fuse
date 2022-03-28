@@ -14,6 +14,8 @@
 #include <utils.h>
 #include <spectrum.h>
 #include <keyboard.h>
+#include <display.h>
+#include <tape.h>
 #include <machines/specplus3.h>
 #include <peripherals/disk/beta.h>
 #include <peripherals/disk/plusd.h>
@@ -1066,6 +1068,7 @@ void retro_run(void)
    int ts_start = start.tv_sec * 1000000 + start.tv_usec;
    int ts_stop, ts_delta;
    input_poll_cb();
+   int frames = display_frame_count;
    do {
       z80_do_opcodes();
       event_do_events();
@@ -1073,8 +1076,7 @@ void retro_run(void)
       ts_stop = stop.tv_sec * 1000000 + stop.tv_usec;
       ts_delta = ts_stop - ts_start;
    }
-   while (!some_audio && ts_delta < 20000);
-
+   while ((tape_playing && ts_delta < 20000) || (!tape_playing && frames == display_frame_count));
    render_video();
 }
 
